@@ -54,6 +54,24 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Project Structure
+
+Here is an overview of the main directories in the `src` folder:
+
+```
+src/
+├── app/
+│   ├── (dashboard)/ # Protected dashboard routes
+│   ├── layout.tsx   # Root application layout
+│   └── page.tsx     # Login page
+├── components/
+│   ├── ui/          # Reusable UI components
+│   └── ...          # Feature components
+├── contexts/        # Global state contexts
+├── lib/             # Utilities and configurations
+└── ...
+```
+
 ## Scripts
 
 - `npm run dev`: Starts the development server.
