@@ -4,17 +4,12 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import {
-  ArrowLeft,
-  ChevronRight,
   TrendingUp,
-  TrendingDown,
   Trash2,
   Edit,
-  MoreVertical,
   Plus,
   Loader2,
   AlertCircle,
-  Package,
   Filter,
 } from "lucide-react";
 import { productApi, Product } from "@/lib/api";
@@ -118,7 +113,7 @@ export default function ProductDetails() {
                           month: "short",
                           day: "numeric",
                           year: "numeric",
-                        }
+                        },
                       )
                     : "N/A"}
                 </span>
@@ -161,7 +156,7 @@ export default function ProductDetails() {
                       key={i}
                       className={cn(
                         "aspect-square rounded-xl bg-slate-50 overflow-hidden cursor-pointer border-2",
-                        i === 0 ? "border-[#F97316]" : "border-transparent"
+                        i === 0 ? "border-[#F97316]" : "border-transparent",
                       )}
                     >
                       <img
@@ -438,7 +433,7 @@ export default function ProductDetails() {
               <p className="text-muted-foreground">
                 Are you sure you want to delete{" "}
                 <span className="font-semibold text-foreground">
-                  "{product.title}"
+                  &quot;{product.title}&quot;
                 </span>
                 ? This action cannot be undone.
               </p>

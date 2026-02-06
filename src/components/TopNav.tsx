@@ -56,7 +56,7 @@ export function TopNav({
       <div
         className={cn(
           "flex items-center gap-2 text-sm text-muted-foreground overflow-hidden",
-          isSearchOpen && "invisible md:visible"
+          isSearchOpen && "invisible md:visible",
         )}
       >
         <button
@@ -69,13 +69,13 @@ export function TopNav({
 
         <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
           <span className="hidden sm:inline font-medium text-foreground">
-            Fikri Store
+            Anadu Store
           </span>
           <ChevronRight className="w-4 h-4 hidden sm:block shrink-0" />
           <span
             className={cn(
               items.length === 0 && "text-foreground font-medium",
-              "truncate"
+              "truncate",
             )}
           >
             Products
@@ -86,7 +86,7 @@ export function TopNav({
               <span
                 className={cn(
                   index === items.length - 1 && "text-foreground font-medium",
-                  "truncate max-w-[100px] sm:max-w-[200px]"
+                  "truncate max-w-[100px] sm:max-w-[200px]",
                 )}
               >
                 {item.label}
@@ -112,7 +112,7 @@ export function TopNav({
       <div
         className={cn(
           "flex items-center gap-2 sm:gap-4 ml-auto pl-2",
-          isSearchOpen && "invisible md:visible"
+          isSearchOpen && "invisible md:visible",
         )}
       >
         {/* Mobile Search Trigger */}

@@ -13,6 +13,7 @@ import {
   RotateCcw,
   LayoutGrid,
   List as ListIcon,
+  X,
 } from "lucide-react";
 import { productApi, Product } from "@/lib/api";
 import { ProductCard } from "./ProductCard";
@@ -45,6 +46,22 @@ export default function Dashboard() {
 
   const [showOutOfStock, setShowOutOfStock] = useState(false);
   const [onSaleOnly, setOnSaleOnly] = useState(false);
+
+  const isFiltered =
+    search !== "" ||
+    category !== "Category" ||
+    type !== "Type" ||
+    showOutOfStock ||
+    onSaleOnly;
+
+  const resetFilters = () => {
+    setSearch("");
+    setCategory("Category");
+    setType("Type");
+    setShowOutOfStock(false);
+    setOnSaleOnly(false);
+    setPage(1);
+  };
 
   const {
     data: products,
@@ -130,7 +147,7 @@ export default function Dashboard() {
   const handleBulkStatusChange = async (ids: number[]) => {
     try {
       await Promise.all(
-        ids.map((id) => productApi.update(id, { stock: 0 })) // Mocking status change by setting stock to 0
+        ids.map((id) => productApi.update(id, { stock: 0 })), // Mocking status change by setting stock to 0
       );
       queryClient.invalidateQueries({ queryKey: ["products"] });
       toast.success(`${ids.length} products updated successfully`);
@@ -145,7 +162,7 @@ export default function Dashboard() {
     const csvContent = [
       headers.join(","),
       ...selectedProducts.map((p) =>
-        [p.id, p.title, p.category, p.price, p.stock, p.sku].join(",")
+        [p.id, p.title, p.category, p.price, p.stock, p.sku].join(","),
       ),
     ].join("\n");
 
@@ -270,6 +287,17 @@ export default function Dashboard() {
                 { label: "Electronics", value: "electronics" },
                 { label: "Clothing", value: "clothing" },
                 { label: "Home", value: "home" },
+                { label: "Beauty", value: "beauty" },
+                { label: "Fragrances", value: "fragrances" },
+                { label: "Furniture", value: "furniture" },
+                { label: "Groceries", value: "groceries" },
+                { label: "Home Decoration", value: "home-decoration" },
+                { label: "Kitchen", value: "kitchen" },
+                { label: "Lighting", value: "lighting" },
+                { label: "Mattresses", value: "mattresses" },
+                { label: "Skincare", value: "skincare" },
+                { label: "Sports", value: "sports" },
+                { label: "Watches", value: "watches" },
               ]}
               value={category === "Category" ? "" : category}
               onChange={(val) => setCategory(val)}
@@ -322,6 +350,16 @@ export default function Dashboard() {
                 </div>
               </div>
             </DropdownMenu>
+            {isFiltered && (
+              <Button
+                variant="outline"
+                onClick={resetFilters}
+                className="gap-2 font-semibold h-[42px] w-full sm:w-auto justify-between sm:justify-start px-3 text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-4 h-4" />
+                Reset
+              </Button>
+            )}
             <div className="flex border border-border rounded-lg overflow-hidden bg-white w-full sm:w-auto justify-center">
               <button
                 onClick={() => setViewMode("grid")}
@@ -517,7 +555,7 @@ export default function Dashboard() {
               onClick={async () => {
                 try {
                   await Promise.all(
-                    bulkIdsToDelete.map((id) => productApi.delete(id))
+                    bulkIdsToDelete.map((id) => productApi.delete(id)),
                   );
                   queryClient.invalidateQueries({ queryKey: ["products"] });
                   setIsBulkDeleteModalOpen(false);

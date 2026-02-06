@@ -48,7 +48,7 @@ export function Sidebar() {
       <div
         className={cn(
           "fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300",
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         onClick={close}
       />
@@ -56,7 +56,7 @@ export function Sidebar() {
       <aside
         className={cn(
           "w-64 h-screen bg-white border-r border-border flex flex-col fixed left-0 top-0 z-50 transition-transform duration-300 transform lg:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="p-6 flex items-center justify-between">
@@ -65,7 +65,7 @@ export function Sidebar() {
               <Package className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-foreground">
-              Fikri Store
+              Anadu Store
             </span>
           </div>
           <button
@@ -106,14 +106,14 @@ export function Sidebar() {
                         "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
                         isActive
                           ? "bg-muted text-foreground"
-                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground",
                       )}
                     >
                       <div className="flex items-center gap-3">
                         <item.icon
                           className={cn(
                             "w-5 h-5",
-                            isActive ? "text-primary" : "text-muted-foreground"
+                            isActive ? "text-primary" : "text-muted-foreground",
                           )}
                         />
                         {item.name}

@@ -83,7 +83,7 @@ export const productApi = {
     } = filters;
 
     // Fetch a larger dataset to perform client-side filtering effectively
-    // API limitation: dummyjson doesn't support complex combined filters well
+    // note: API limitation: dummyjson doesn't support complex combined filters well
     let endpoint = "/products?limit=100";
     if (search) {
       endpoint = `/products/search?q=${search}&limit=100`;
@@ -99,7 +99,7 @@ export const productApi = {
       // Filter by Type (Mock logic based on tags or category)
       if (type && type !== "Type") {
         const productType = product.tags?.some((t) =>
-          t.toLowerCase().includes(type.toLowerCase())
+          t.toLowerCase().includes(type.toLowerCase()),
         )
           ? type
           : "physical"; // Default to physical

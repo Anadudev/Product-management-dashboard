@@ -94,7 +94,7 @@ export default function Home() {
           </form>
 
           <p className="text-center mt-8 text-xs text-muted-foreground">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a
               href="#"
               className="font-bold text-primary hover:text-primary/80 uppercase tracking-widest"
