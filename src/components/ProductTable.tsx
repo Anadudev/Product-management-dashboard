@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { MoreHorizontal, Trash2, Download, RefreshCw } from "lucide-react";
+import Link from "next/link";
+import {
+  MoreHorizontal,
+  Trash2,
+  Download,
+  RefreshCw,
+  Edit,
+  Eye,
+} from "lucide-react";
 import { Product } from "@/lib/api";
 import { Badge } from "./ui/Badge";
 import { Button } from "./ui/Button";
+import { DropdownMenu } from "./ui/DropdownMenu";
 import { cn } from "@/lib/utils";
 
 interface ProductTableProps {
@@ -100,8 +109,8 @@ export function ProductTable({
               (product.stock || 0) > 20
                 ? "High"
                 : (product.stock || 0) > 0
-                ? "Low"
-                : "Out of Stock";
+                  ? "Low"
+                  : "Out of Stock";
 
             return (
               <tr
@@ -175,8 +184,8 @@ export function ProductTable({
                             stockStatus === "High"
                               ? "bg-green-500"
                               : stockStatus === "Low"
-                              ? "bg-orange-500"
-                              : "bg-red-500"
+                                ? "bg-orange-500"
+                                : "bg-red-500",
                           )}
                           style={{ width: `${stockLevel}%` }}
                         />
@@ -185,13 +194,47 @@ export function ProductTable({
                   </div>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-8 h-8 p-0 rounded-lg"
+                  <DropdownMenu
+                    align="right"
+                    trigger={
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="w-8 h-8 p-0 rounded-lg"
+                      >
+                        <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
+                      </Button>
+                    }
                   >
-                    <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
-                  </Button>
+                    <div className="flex flex-col gap-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="justify-start h-8 px-2 text-xs font-medium w-full"
+                        onClick={() => onEdit(product)}
+                      >
+                        <Edit className="w-3.5 h-3.5 mr-2 text-muted-foreground" />
+                        Edit
+                      </Button>
+                      <Link
+                        href={`/products/${product.id}`}
+                        className="flex items-center w-full h-8 px-2 text-xs font-medium hover:bg-muted rounded-md transition-colors"
+                      >
+                        <Eye className="w-3.5 h-3.5 mr-2 text-muted-foreground" />
+                        View Details
+                      </Link>
+                      <div className="h-px bg-border my-0.5" />
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="justify-start h-8 px-2 text-xs font-medium w-full text-red-500 hover:text-red-600 hover:bg-red-50"
+                        onClick={() => onDelete(product.id)}
+                      >
+                        <Trash2 className="w-3.5 h-3.5 mr-2" />
+                        Delete
+                      </Button>
+                    </div>
+                  </DropdownMenu>
                 </td>
               </tr>
             );
